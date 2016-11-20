@@ -1,4 +1,14 @@
-<!DOCTYPE>
+<!DOCTYPE html>
+
+<!--
+	COMP 426 Final Project
+	Group Members:
+		Brian Dalton (CS ID: bwdalton)
+		Benjamin Croisdale (CS ID: povran)
+	
+	Project Name: Critters Game
+	
+-->
 
 <html lang="en">
 	<head>
@@ -11,10 +21,7 @@
 		 
 		<link rel='stylesheet' type='text/css' href='styles.css'> 
 		
-		<link rel='icon' type='image/ico' href='assets/generic/favicon.ico'>
-		
-		<!-- jQuery CDN -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<link rel='icon' type='image/ico' href='favicon.ico'>
 		
 		<!-- Google Fonts -->
 		<link href="https://fonts.googleapis.com/css?family=Trocchi|Yatra+One" rel="stylesheet">
@@ -22,37 +29,32 @@
 	</head>
 	
 	<body>
-		<div id="header">
-			<h1>Header</h1>
-		</div>
+		<h1>COMP 426 Final Project</h1>
+		<h2>Critters Game</h2>
 		
-		<div id="footer">
-			<h3>Footer</h3>
-		</div>
+		<h2>Members</h2>
+		<ul>
+			<li>Brian Dalton (bwdalton)</li>
+			<li>Benjamin Croisdale (povran)</li>
+		</ul>
 		
-		<!-- Construction Queue -->
-		<div class="ctr_pane" id="d_consq">
-			<h2>Construction Queue</h2>
-		</div>
+		<h2>Description</h2>
+		<p>The idea here is to create a game in the vein of <a href="adarkroom.doublespeakgames.com">A Dark Room</a>. That
+		is, something incremental that develops as the player progesses, but with multiplayer elements. Players will be given
+		a small group of critters which they must breed to collect resources from a private pool. Once a certain level of
+		development is reached, players will then gain access to a common pool of resources that speed development. Drawing
+		from this pool forms a tragedy of the commons which will be the core hook of the game, can players collaborate to
+		share in the gains?  Or will the strongest muscle out all competition?</p>
 		
-		<!-- Breeding -->
-		<div class="ctr_pane" id="d_breed">
-			<h2>Breeding</h2>
-			<!-- Lines (script, div id={line num}) -->
-		</div>
+		<p>For the technology side of things, this game will run primarily in the player's browser for the core game loop
+		(breed critters to collect more resources to breed better critters), but with asynchonous elements when users
+		draw from the common pool, trade, or attack each other. The game will also include a rudementary chat client to 
+		aid communication.</p>
 		
-		<!-- Resource Gathering -->
-		<div class="ctr_pane" id="d_gather">
-			<h2>Resource Gathering</h2>
-		</div>
+		<p>We designed this project as a sort of ladder, with a very simple-to-implement core mechanic that should meet the
+		minimum project requirements and many optional add ons which we can make once we've built the core. Hopefully this
+		means that we will accomplish as much as we can without taking on too much.</p>
 		
-		<!-- Training -->
-		<div class="ctr_pane" id="d_train">
-			<h2>Training</h2>
-		</div>
-		
-		<!-- Communication -->
-		<div class="ctr_pane" id="d_comm">
-			<h2>Comms</h2>
-		</div>
+		<h2><a href="mockup.html">Our Current Mockup</a></h2>
+		</body>
 </html>
