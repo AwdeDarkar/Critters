@@ -1,0 +1,34 @@
+tables:
+	player
+		id \\uid
+		email \\user email
+		password
+		name \\player name	
+		site \\site location
+		siteAttackList \\boolean vector for all other players true if attacking site false otherwise
+		siteDefendList \\boolean vector to tell defensive troops to defend others if attacked
+		siteDrawRate \\unobtainium draw rate
+		homeDefense \\own forces defending home		
+	
+	army
+		owner \\owner of the army
+		player \\location of the army
+		defense \\true if a defending force (will automatically defend all attacks) false if an attacking force (will automatically attack defenders)
+		size \\size of the army (premultiplied)
+		special \\any special traits (csv if more than one) that are relevant
+
+	site
+		id \\uid
+		ubt \\unobtainium
+		ubtRt \\unobtainium refresh rate (decreases every time ubt drops to zero, increases with upgrades)
+		ubtMax \\max storage for unobtainium in site
+		upgrade \\percent complete until next upgrade
+		
+	message
+		id
+		timestamp
+		sender
+		recipient \\can broadcast to the entire site
+		content
+		resource \\resource string for sending goods
+

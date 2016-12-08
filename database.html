@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+<!--
+	COMP 426 Final Project
+	Group Members:
+		Brian Dalton (CS ID: bwdalton)
+		Benjamin Croisdale (CS ID: povran)
+	
+	Project Name: Critters Game
+	
+-->
+
+<html lang="en">
+	<head>
+		<title>Database Design</title>
+		
+		<meta charset="UTF-8">
+		<meta name="description" content="design">
+		<meta name="keywords" content="Incomplete,Testing">
+		<meta name="author" content="Brian William, Benjamin Croisdale">
+		 
+		<link rel='stylesheet' type='text/css' href='styles.css'> 
+		
+		<link rel='icon' type='image/ico' href='favicon.ico'>
+		
+		<!-- Google Fonts -->
+		<link href="https://fonts.googleapis.com/css?family=Trocchi|Yatra+One" rel="stylesheet">
+		
+	</head>
+	
+	<body>
+		<h1>COMP 426 Final Project</h1>
+		<h2>Critters Game Database and API Design</h2>
+		
+		<h3>Tables</h3>
+		<ul>
+			<li>Players
+				<ul>
+					<li>playerID: <i>the player's UID</i></li>
+					<li>email: <i>the player's email (used for verification purposes only)</i></li>
+					<li>name: <i>the player's username</i></li>
+					<li>siteID: <i>UID of the site at which the player is placed</i></li>
+					<li>siteAttackList: <i>tells all armies in the site which players to auto-attack</i></li>
+					<li>siteDefendList: <i>tells all armies in the site which players to auto-defend</i></li>
+					<li>siteDrawRate: <i>rate at which the player is drawing unobtainium from the site</i></li>
+				</ul>
+			</li>
+			<li>Armies
+				<ul>
+					<li>ownerID: <i>the owner of the army</i></li>
+					<li>locationID: <i>the player at which the army is located (-1 for site)</i></li>
+					<li>defense: <i>boolean flag tells if the army is set to offense or defense</i></li>
+					<li>size: <i>core size of the army</i></li>
+					<li>special: <i>comma separated list of attributes relevant to the army</i></li>
+				</ul
+			</li>
+			<li>Sites
+				<ul>
+					<li>siteID: <i>the site's UID</i></li>
+					<li>ubt: <i>amount of unobtainium available in the site</i></li>
+					<li>ubtRt: <i>rate at which unobtainium increases in the site</i></li>
+					<li>ubtMax: <i>maximum amount of unobtainium the site can hold</i></li>
+					<li>upgrade: <i>percent completion of next site upgrade</i></li>
+				</ul>
+			</li>
+			<li>Messages
+				<ul>
+					<li>messageID: <i>the message's UID</i></li>
+					<li>timestamp: <i>unix time the message was sent</i></li>
+					<li>senderID: <i>id of the player which sent the message</i></li>
+					<li>recipientID: <i>id of the player which recieved the message (-1 to send to the whole site)</i></li>
+					<li>content: <i>string content of the message</i></li>
+					<li>resources: <i>comma separated list of resources sent</i></li>
+				</ul>
+			</li>
+		</ul>
+		<h3>API Calls</h3>
+		Here are the things the API needs to be able to do:
+		<ul>
+			<li>Update game loop (basically pull all orders for troop movement, resolve conflicts, and distribute UBT)</li>
+			<li>Handle message sending and trading (same on the back-end, separated out on the front-end)</li>
+			<li>Register new players and place them in sites (sites will max out at 17 or 19 players and should try to keep the number of players at a site prime)</li>
+			<li>Check player login and issue session info (maybe also include JSON save data, or maybe use a cookie)</lI>
+		</ul>
+	</body>
+</html>
