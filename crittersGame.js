@@ -154,4 +154,19 @@ var Breeder = function()
 	//Critters
 	this.a = null;
 	this.b = null;
+
+	this.breed = function(site)
+	{
+		var critter = new Critter();
+		critter.age = 0;
+		critter.xp = 0;
+		critter.hp = 10; //NEWHP
+		critter.special = this.genSpecial();
+		site.totalPop.push(critter);
+	}
+
+	this.genSpecial = function() =
+	{
+
+	}
 }

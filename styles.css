@@ -166,7 +166,8 @@ h1 h2 h3
   top: 50%;
 }
 
-#button1, #button2, #button3{
+button
+{
   font-family: 'Trocchi', serif;
   font-size: 16px;
   border-radius: 8px;
@@ -175,11 +176,10 @@ h1 h2 h3
   padding: 6px;
 }
 
-#button4{
-  font-family: 'Trocchi', serif;
-  font-size: 16px;
-  border-radius: 8px;
-  background-color: #e7e7e7; color: black;
-  text-align: left;
-  padding-right: 26px;
+.tabcontent
+{
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
 }

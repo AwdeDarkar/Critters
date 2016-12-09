@@ -5,56 +5,77 @@
 	Group Members:
 		Brian Dalton (CS ID: bwdalton)
 		Benjamin Croisdale (CS ID: povran)
-	
+
 	Project Name: Critters Game
-	
+
 -->
 
 <html lang="en">
 	<head>
 		<title>Critters</title>
-		
+
 		<meta charset="UTF-8">
 		<meta name="description" content="Mockup">
 		<meta name="keywords" content="Incomplete,Testing">
 		<meta name="author" content="Brian William, Benjamin Croisdale">
-		 
-		<link rel='stylesheet' type='text/css' href='styles.css'> 
-		
+
+		<link rel='stylesheet' type='text/css' href='styles.css'>
+
 		<link rel='icon' type='image/ico' href='favicon.ico'>
-		
+
 		<!-- Google Fonts -->
 		<link href="https://fonts.googleapis.com/css?family=Trocchi|Yatra+One" rel="stylesheet">
-		
+
+		<!-- jQUery CDN -->
+		<link href:"https://code.jquery.com/jquery-3.1.1.min.js" rel="script">
 	</head>
-	
+
 	<body>
-		<h1>COMP 426 Final Project</h1>
-		<h2>Critters Game</h2>
-		
-		<h2>Members</h2>
-		<ul>
-			<li>Brian Dalton (bwdalton)</li>
-			<li>Benjamin Croisdale (povran)</li>
-		</ul>
-		
-		<h2>Description</h2>
-		<p>The idea here is to create a game in the vein of <a href="adarkroom.doublespeakgames.com">A Dark Room</a>. That
-		is, something incremental that develops as the player progesses, but with multiplayer elements. Players will be given
-		a small group of critters which they must breed to collect resources from a private pool. Once a certain level of
-		development is reached, players will then gain access to a common pool of resources that speed development. Drawing
-		from this pool forms a tragedy of the commons which will be the core hook of the game, can players collaborate to
-		share in the gains?  Or will the strongest muscle out all competition?</p>
-		
-		<p>For the technology side of things, this game will run primarily in the player's browser for the core game loop
-		(breed critters to collect more resources to breed better critters), but with asynchonous elements when users
-		draw from the common pool, trade, or attack each other. The game will also include a rudementary chat client to 
-		aid communication.</p>
-		
-		<p>We designed this project as a sort of ladder, with a very simple-to-implement core mechanic that should meet the
-		minimum project requirements and many optional add ons which we can make once we've built the core. Hopefully this
-		means that we will accomplish as much as we can without taking on too much.</p>
-		
-		<h2><a href="mockup.html">Our Current Mockup</a></h2>
-		</body>
+		<script>
+		function openTab(evt, tab)
+		{
+			// Declare all variables
+			var i, tabcontent, tablinks;
+
+			// Get all elements with class="tabcontent" and hide them
+			tabcontent = document.getElementsByClassName("tabcontent");
+			for (i = 0; i < tabcontent.length; i++)
+			{
+				tabcontent[i].style.display = "none";
+			}
+
+			// Get all elements with class="tablinks" and remove the class "active"
+			tablinks = document.getElementsByClassName("tablinks");
+			for (i = 0; i < tablinks.length; i++)
+			{
+				tablinks[i].className = tablinks[i].className.replace(" active", "");
+			}
+
+			// Show the current tab, and add an "active" class to the link that opened the tab
+			document.getElementById(tab).style.display = "block";
+			evt.currentTarget.className += " active";
+		}
+
+		</script>
+
+		<div id="win_breeding" class="tabcontent">
+
+		</div>
+
+		<div id="win_resources" class="tabcontent">
+
+		</div>
+
+		<div id="win_trade" class="tabcontent">
+
+		</div>
+
+		<div id="win_site" class="tabcontent">
+
+		</div>
+
+		<div id="win_barracks" class="tabcontent">
+
+		</div>
+	</body>
 </html>
