@@ -26,55 +26,71 @@
 		<!-- Google Fonts -->
 		<link href="https://fonts.googleapis.com/css?family=Trocchi|Yatra+One" rel="stylesheet">
 
-		<!-- jQUery CDN -->
+		<!-- jQuery CDN -->
 		<link href:"https://code.jquery.com/jquery-3.1.1.min.js" rel="script">
 	</head>
 
 	<body>
 		<script>
-		function openTab(evt, tab)
-		{
-			// Declare all variables
-			var i, tabcontent, tablinks;
-
-			// Get all elements with class="tabcontent" and hide them
-			tabcontent = document.getElementsByClassName("tabcontent");
-			for (i = 0; i < tabcontent.length; i++)
+			function openTab(evt, tab)
 			{
-				tabcontent[i].style.display = "none";
-			}
+				// Declare all variables
+				var i, tabcontent, tablinks;
 
-			// Get all elements with class="tablinks" and remove the class "active"
-			tablinks = document.getElementsByClassName("tablinks");
-			for (i = 0; i < tablinks.length; i++)
-			{
-				tablinks[i].className = tablinks[i].className.replace(" active", "");
-			}
+				// Get all elements with class="tabcontent" and hide them
+				tabcontent = document.getElementsByClassName("tabcontent");
+				for (i = 0; i < tabcontent.length; i++)
+				{
+					tabcontent[i].style.display = "none";
+				}
 
-			// Show the current tab, and add an "active" class to the link that opened the tab
-			document.getElementById(tab).style.display = "block";
-			evt.currentTarget.className += " active";
-		}
+				// Get all elements with class="tablinks" and remove the class "active"
+				tablinks = document.getElementsByClassName("tablinks");
+				for (i = 0; i < tablinks.length; i++)
+				{
+					tablinks[i].className = tablinks[i].className.replace(" active", "");
+				}
+
+				// Show the current tab, and add an "active" class to the link that opened the tab
+				document.getElementById(tab).style.display = "block";
+				evt.currentTarget.className += " active";
+			}
 
 		</script>
 
-		<div id="win_breeding" class="tabcontent">
+		<div id="header">
 
 		</div>
 
-		<div id="win_resources" class="tabcontent">
+		<div id="footer">
 
 		</div>
 
-		<div id="win_trade" class="tabcontent">
+		<div id="panel">
 
 		</div>
 
-		<div id="win_site" class="tabcontent">
+		<div id="main">
 
-		</div>
+			<div id="win_breeding" class="tabcontent">
 
-		<div id="win_barracks" class="tabcontent">
+			</div>
+
+			<div id="win_resources" class="tabcontent">
+
+			</div>
+
+			<div id="win_trade" class="tabcontent">
+
+			</div>
+
+			<div id="win_site" class="tabcontent">
+
+			</div>
+
+			<div id="win_barracks" class="tabcontent">
+				
+			</div>
 
 		</div>
 	</body>
