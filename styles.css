@@ -87,17 +87,53 @@ h1 h2 h3
 
 }
 
-
-
-.tabcontent
+#panel
 {
-    display: none;
-    padding: 6px 12px;
-    border: 1px solid #ccc;
-    border-top: none;
+    top: 20%;
+    left: 0px;
+}
+
+.tabs
+{
+    list-style: none;
+    text-align: right;
+    width: 80px;
+}
+
+.tablinks
+{
+    height: 30px;
+    border: 1px solid black;
+    vertical-align: text-bottom;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    cursor: pointer;
 }
 
 .active
 {
+    background-color: #FEFEFA;
+    border-right: none;
+}
 
+.tablinks a
+{
+    text-decoration: none;
+    color: #0F1416;
+    margin-top: 12px;
+}
+
+#main
+{
+
+}
+
+.tabcontent
+{
+    display: none;
+    margin-left: 20%;
+    margin-right: 20%;
+    height: 80%;
+    border: 1px solid #ccc;
+    background-color: #FEFEFA;
 }
