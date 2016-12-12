@@ -6,7 +6,7 @@
 		<meta name="description" content="Other Village">
 		<meta name="author" content="Brian Dalton, Benjamin Croisdale">
 
-		<link rel='stylesheet' type='text/css' href='styles.css'>
+		<link rel='stylesheet' type='text/css' href='oldStyles.css'>
 
 		<!-- jQuery CDN -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -21,6 +21,38 @@
 			<h1>(Username)'s Village</h1>
 		</div>
 
+		<div class="ctr_pane" id="r_avail">
+			<h2>Resource Center</h2>
+			<p>Resources Available: <label id="available">0</label></p><br><br>
+			<div id="trade_center">
+				<br><h3> Propose a Trade<h3>
+				<form>
+						I will give: <input type="number" name="resources_given" > Resources<br>
+						In exchange for: <input type="number" name="resources_received"> Resources<br><br>
+						<input id="button1" type="submit">
+				</form>
+			</div>
+		</div>
+
+		<div class="ctr_pane" id="t_avail">
+			<h2>Current Troops</h2>
+			<p>Offensive: <label id="o_troops">0</label></p>
+			<p>Defensive: <label id="d_troops">0</label></p>
+			<div id="trade_center">
+				<br><h3> Propose a Trade<h3>
+				<form>
+						I will give: <input type="number" name="troops_given" > Troops<br>
+						In exchange for: <input type="number" name="troops_received"> Troops<br><br>
+						<input id="button1" type="submit">
+				</form>
+			</div>
+		</div>
+
+		<div id="attack_button">
+			<button id="button1" type="button"> Attack! </button><br><br>
+			<button id="button1" type="button" onclick="window.location='mainland.html';"> Return to<br>Mainland </button>
+		</div>
 
   </body>
+
 </html>

@@ -71,6 +71,11 @@ h1 h2 h3
 	font-family: 'Yatra One', cursive;
 }
 
+form{
+  font-family: 'Trocchi', serif;
+  font-size: 16px;
+}
+
 .ctr_pane
 {
 	background-color: #FEFEFA;
@@ -166,8 +171,7 @@ h1 h2 h3
   top: 50%;
 }
 
-button
-{
+#button1, #button2, #button3{
   font-family: 'Trocchi', serif;
   font-size: 16px;
   border-radius: 8px;
@@ -176,15 +180,62 @@ button
   padding: 6px;
 }
 
-.tabcontent
-{
-    display: none;
-    padding: 6px 12px;
-    border: 1px solid #ccc;
-    border-top: none;
+#button4{
+  font-family: 'Trocchi', serif;
+  font-size: 16px;
+  border-radius: 8px;
+  background-color: #e7e7e7; color: black;
+  text-align: left;
+  padding-right: 30px;
 }
 
-.active
+#r_avail
 {
+	position: absolute;
+	left: 2%;
+	width: 40%;
+	top: 12%;
+	height: 80%;
+  text-align: center;
+}
 
+#t_avail
+{
+	position: absolute;
+	right: 2%;
+	width: 40%;
+	top: 12%;
+	height: 80%;
+  text-align: center;
+}
+
+#attack_button
+{
+  position: absolute;
+  left: 46%;
+  top: 42%;
+}
+
+#trade_center{
+  position: absolute;
+  bottom: 10%;
+  left: 12%;
+  padding: 20px;
+  border: solid thin black;
+}
+
+#chat_box{
+  position: absolute;
+  left: 4%;
+  width: 85%;
+  height: 68%;
+  padding: 10px;
+  padding-bottom: 20px;
+  border: solid thin black;
+}
+
+#chat_submit{
+  position: absolute;
+  bottom: 2%;
+  right: 5%;
 }

@@ -6,7 +6,7 @@
 		<meta name="description" content="Mainland">
 		<meta name="author" content="Brian Dalton, Benjamin Croisdale">
 
-		<link rel='stylesheet' type='text/css' href='styles.css'>
+		<link rel='stylesheet' type='text/css' href='oldStyles.css'>
 
 		<!-- jQuery CDN -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -29,6 +29,15 @@
     <!-- Communication -->
 		<div class="ctr_pane" id="d_comm">
 			<h2>Chat Box</h2>
+			<div id="chat_box">
+				<output name="chat_output" for="chat_input"></output>
+			</div>
+			<div id="chat_submit">
+				<form oninput="chat_output.value=chat_input.value">
+						<input type="text" name="chat_input">
+						<input type="submit">
+					</form>
+				</div>
 		</div>
 
     <!-- Return Home -->
@@ -38,7 +47,13 @@
 
     <!-- Visit other Village -->
 		<div class="ctr_pane" id="d_visit">
-      <button id="button1" type="button" onclick="window.location='othervillage.html';"> Visit New <br> Village </button>
+			<select id="button1" onchange="location = this.value;">
+				<option >Visit Other Village...&nbsp&nbsp</option>
+  			<option value="othervillage.html">(User 1)'s Village</option>
+  			<option value="othervillage.html">(User 2)'s Village</option>
+  			<option value="othervillage.html">(User 3)'s Village</option>
+  			<option value="othervillage.html">Random</option>
+			</select>
 		</div>
 
   </body>
