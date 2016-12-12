@@ -171,14 +171,12 @@ var Breeder = function()
 	}
 }
 
-function loadCritter(xmlStr)
+function loadCritter(doc)
 {
-    var parser = new DOMParser();
-    var xmlDoc = parser.parseFromString(xmlStr,"text/xml");
     var r = new Critter();
-    r.age = getTag(xmlDoc, "age");
-    r.hp = getTag(xmlDoc, "hp");
-    r.xp = getTag(xmlDoc, "xp");
+    r.age = getTag(doc, "age");
+    r.hp = getTag(doc, "hp");
+    r.xp = getTag(doc, "xp");
     special = doc.getElementByTagName("special");
     for(var i = 0; i < special.childNodes.length; i++) { r.special.push(special.childNodes[i].nodeValue); }
     return r;
