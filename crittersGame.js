@@ -1,46 +1,46 @@
-var Game =
+function draw(ps)
 {
+    //DRAW POPULATION
+    var poplist = document.getElementById("poplist");
+    clearnode(poplist);
+    for(var i = 0; i < ps.length; i++)
+    {
+        var row = poplist.insertRow(0);
+        var hpcell = row.insertCell(0);
+        var agecell = row.insertCell(1);
+        var xpcell = row.inserCell(2);
 
-}
-
-Game.draw = function()
-{
-
-}
-
-Game.update = function()
-{
-
-}
-
-Game.run = function()
-{
-  var loops = 0, skipTicks = 1000,
-      maxFrameSkip = 10,
-      nextGameTick = (new Date).getTime();
-
-  return function
-  {
-    loops = 0;
-    while ((new Date).getTime() > nextGameTick && loops < maxFrameSkip)
-	{
-      Game.update();
-      nextGameTick += skipTicks;
-      loops++;
+        hpcell.innerHTML = ps[i].hp;
+        agepcell.innerHTML = ps[i].age;
+        xpcell.innerHTML = ps[i].xp;
     }
+}
 
-    Game.draw();
-  };
-}();
+function clearnode(node)
+{
+    while (node.firstChild) { node.removeChild(node.firstChild); }
+}
 
-// Start the game loop
-Game._intervalId = setInterval(Game.run, 0);
+function update()
+{
+
+}
+
+function init()
+{
+    var ps = new PlayerSite();
+    var critter = loadCritter(HARD_DEF_CRITTER);
+    ps.totalPop.push(critter);
+    ps.totalPop.push(critter);
+
+    return ps;
+}
 
 var Critter = function()
 {
 	this.hp = 0;
 	this.age = 0;
-	this.exp = 0;
+	this.xp = 0;
 	this.special = [];
 }
 
@@ -67,22 +67,22 @@ var PlayerSite = function(mainSite)
 		this.clay = min(this.clay + this.hoursMine, this.sClay);
 		this.food += min(this.food + this.hoursHarvest, this.sFood);
 
-		for proj in this.projects
+		for(var i = 0; i < this.projects.length; i++)
 		{
-			proj.BuildUnit(this);
+			this.projects[0].BuildUnit(this);
 			this.checkHours();
 			this.checkClay();
 		}
 
-		for army in this.armies
+		for(var j = 0; j < this.armies.length; j++)
 		{
-			army.train(this);
+			this.armies[j].train(this);
 			this.checkFood();
 		}
 
-		for line in this.breeders
+		for(var k = 0; k < this.breeders.length; k++)
 		{
-			line.breed(this);
+			this.breeders[k].breed(this);
 			this.checkFood();
 		}
 
@@ -91,22 +91,22 @@ var PlayerSite = function(mainSite)
 		this.main.submitTurn(this);
 	}
 
-	this.checkHours()
+	this.checkHours = function()
 	{
 
 	}
 
-	this.checkFood()
+	this.checkFood = function()
 	{
 
 	}
 
-	this.checkClay()
+	this.checkClay = function()
 	{
 
 	}
 
-	this.checkUBT()
+	this.checkUBT = function()
 	{
 
 	}
@@ -165,8 +165,27 @@ var Breeder = function()
 		site.totalPop.push(critter);
 	}
 
-	this.genSpecial = function() =
+	this.genSpecial = function()
 	{
 
 	}
 }
+
+function loadCritter(xmlStr)
+{
+    var parser = new DOMParser();
+    var xmlDoc = parser.parseFromString(xmlStr,"text/xml");
+    var r = new Critter();
+    r.age = getTag(xmlDoc, "age");
+    r.hp = getTag(xmlDoc, "hp");
+    r.xp = getTag(xmlDoc, "xp");
+    special = doc.getElementByTagName("special");
+    for(var i = 0; i < special.childNodes.length; i++) { r.special.push(special.childNodes[i].nodeValue); }
+    return r;
+}
+
+
+
+function getTag(doc, tag) { return doc.getElementsByTagName(tag)[0].childNodes[0].nodeValue; }
+
+var HARD_DEF_CRITTER = "<critter>\n\t<age>0</age>\n\t<hp>10</hp>\n\t<xp>0</xp>\n\t<special>\n\t\t<sp>progen</sp>\n\t</special>\n</critter>";

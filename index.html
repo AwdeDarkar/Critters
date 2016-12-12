@@ -27,7 +27,10 @@
 		<link href="https://fonts.googleapis.com/css?family=Trocchi|Yatra+One" rel="stylesheet">
 
 		<!-- jQuery CDN -->
-		<link href:"https://code.jquery.com/jquery-3.1.1.min.js" rel="script">
+		<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+		<!-- Game Code -->
+		<script type="text/javascript" src="crittersGame.js"></script>
 	</head>
 
 	<body>
@@ -57,6 +60,9 @@
 
 			}
 
+			var ps = init();
+			draw(ps);
+
 		</script>
 
 		<div id="header">
@@ -79,10 +85,6 @@
 
 		<div id="main">
 
-			<div id="tab_breeding" class="tabcontent">
-				<p>Breeding</p>
-			</div>
-
 			<div id="tab_resources" display="none" class="tabcontent">
 				<p>Resources</p>
 			</div>
@@ -97,6 +99,35 @@
 
 			<div id="tab_barracks" display="none" class="tabcontent">
 				<p>Barracks</p>
+			</div>
+
+			<div id="tab_breeding" display="block" class="tabcontent">
+				<div id="d_breedlist">
+					<div class="breedline">
+						<p>Line 1</p>
+						<ul>
+							<li>Trait 1</li>
+							<li>Trait 2</li>
+						</ul>
+					</div>
+
+					<div class="breedline">
+						<p>Line 2</p>
+						<ul>
+							<li>Trait 1</li>
+							<li>Trait 2</li>
+						</ul>
+					</div>
+				</div>
+				<div id="d_poplist">
+					<table id="poplist">
+						<tr>
+							<td>hp</td>
+							<td>age</td>
+							<td>sp</td>
+						</tr>
+					</table>
+				</div>
 			</div>
 
 		</div>
