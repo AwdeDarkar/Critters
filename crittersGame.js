@@ -1,31 +1,52 @@
-//Thanks Stackoverflow
-Array.prototype.unique = function() {
-    var a = this.concat();
-    for(var i=0; i<a.length; ++i) {
-        for(var j=i+1; j<a.length; ++j) {
-            if(a[i] === a[j])
-                a.splice(j--, 1);
-        }
-    }
-
-    return a;
-};
-
 var HARD_DEF_CRITTER = "<critter>\n\t<age>0</age>\n\t<hp>10</hp>\n\t<xp>0</xp>\n\t<special>\n\t\t<sp>progen</sp>\n\t</special>\n</critter>";
 var BREED_UPDATE = 4;
 var OLD_AGE = 12;
 
+function handleLogin()
+{
+    var state = $.cookie('playerstate');
+    if(state == null)
+    {
+        newPlayer();
+    }
+    else
+    {
+
+    }
+}
+
+function newPlayer()
+{
+    init();
+    var id = $.get("http://wwwp.cs.unc.edu/Courses/comp426-f16/users/povran/project/update.php?type=genplayer");
+    console.log(id);
+    ps.id = 0;
+
+	draw();
+	setInterval(draw, 5000);
+	setInterval(update, 1000);
+    setInterval(saveState, 10000);
+}
+
+function saveState()
+{
+    $.removeCookie('playerstate');
+    $.cookie('playerstate', JSON.stringify(ps), { expires : 1});
+}
+
 function draw()
 {
     //UPDATE RESOURCE LIST
-    document.getElementById("pop_info").innerHTML = ps.totalPop.length + " (+ " + Math.round((ps.breeders.length/BREED_UPDATE)*100)/100 + "/sec)";
-    document.getElementById("food_info").innerHTML = Math.round(ps.food) + " (+ " + Math.round((ps.hoursHarvest - (ps.totalPop.length + (ps.breeders.length/BREED_UPDATE)))*100)/100 + "/sec)";
-    document.getElementById("clay_info").innerHTML = Math.round(ps.clay) + " (+ " + Math.round((ps.hoursMine*100))/100 + "/sec)";
+    document.getElementById("pop_info").innerHTML = ps.totalPop.length + " (" + Math.round((ps.breeders.length/BREED_UPDATE)*100)/100 + "/sec)";
+    document.getElementById("food_info").innerHTML = Math.round(ps.food) + " (" + Math.round((ps.hoursHarvest - (ps.totalPop.length + (ps.breeders.length/BREED_UPDATE)))*100)/100 + "/sec)";
+    document.getElementById("clay_info").innerHTML = Math.round(ps.clay) + " (" + Math.round((ps.hoursMine*100))/100 + "/sec)";
     document.getElementById("ubt_info").innerHTML = ps.ubt;
+    document.getElementById("wrk_info").innerHTML = Math.round(ps.workHours*100)/100;
 
     //DRAW POPULATION
     var poplist = document.getElementById("poplist");
     clearnode(poplist);
+
     for(var i = 0; i < ps.totalPop.length; i++)
     {
         var row = poplist.insertRow(i);
@@ -37,10 +58,10 @@ function draw()
         var selcell = row.insertCell(4);
 
         gencell.innerHTML = i + ")";
-        hpcell.innerHTML = Math.round(ps.totalPop[i].hp);
-        agecell.innerHTML = ps.totalPop[i].age;
-        xpcell.innerHTML = Math.round(ps.totalPop[i].xp*100)/100;
-        if(ps.totalPop[i].idle)
+        hpcell.innerHTML = "hp: " + Math.round(ps.totalPop[i].hp);
+        agecell.innerHTML = "age: " + ps.totalPop[i].age;
+        xpcell.innerHTML = "xp: " + Math.round(ps.totalPop[i].xp*100)/100;
+        if(ps.totalPop[i].job === "none")
         {
             var box = document.createElement("input");
             box.type = "checkbox";
@@ -48,6 +69,9 @@ function draw()
             box.setAttribute("class", "poplist_dex");
             box.setAttribute("onclick", "drawButtons();" );
             selcell.appendChild(box);
+        }else
+        {
+            selcell.innerHTML = ps.totalPop[i].job;
         }
     }
 
@@ -126,8 +150,6 @@ function init()
     var critter = loadCritter($($.parseXML(HARD_DEF_CRITTER)));
     ps.totalPop.push(critter);
     ps.totalPop.push(critter);
-
-    return ps;
 }
 
 function newLine()
@@ -163,7 +185,7 @@ function toFarms()
         if(box != null && box.checked)
         {
             ps.hoursHarvest += ps.totalPop[i].xp * 1.2;
-            ps.totalPop[i].idle = false;
+            ps.totalPop[i].job = "farmer";
         }
     }
     draw();
@@ -194,7 +216,7 @@ function toMines()
         if(box != null && box.checked)
         {
             ps.hoursMine += ps.totalPop[i].xp;
-            ps.totalPop[i].idle = false;
+            ps.totalPop[i].job = "miner";
         }
     }
     draw();
@@ -207,12 +229,13 @@ var Critter = function()
 	this.age = 0;
 	this.xp = 0;
     this.gen = 0;
-    this.idle = true;
+    this.job = "none";
 	this.special = [];
 }
 
 var PlayerSite = function(mainSite)
 {
+    this.id = -1;
 	this.main = mainSite;
 	this.clay = 0;
 	this.sClay = 100;
@@ -234,6 +257,7 @@ var PlayerSite = function(mainSite)
 	{
 		this.clay = Math.min(this.clay + this.hoursMine, this.sClay);
 		this.food = Math.min(this.food + this.hoursHarvest, this.sFood);
+
         //console.log(this.hoursHarvest);
 		for(var i = 0; i < this.projects.length; i++)
 		{
@@ -253,6 +277,7 @@ var PlayerSite = function(mainSite)
             if(this.breednum > BREED_UPDATE)
             {
     			this.breeders[k].breed(this);
+                this.food -= 1;
     			this.checkFood();
                 this.breednum = 0;
             }
@@ -261,6 +286,7 @@ var PlayerSite = function(mainSite)
                 this.breeders = [];
 		}
 
+        workHours = 0;
         for(var i = 0; i < this.totalPop.length; i++)
         {
             if(this.breednum > BREED_UPDATE)
@@ -275,10 +301,14 @@ var PlayerSite = function(mainSite)
             {
                 for(var j = 0; j < this.breeders.length; j++)
                 {
-                    this.breeders[i].checkLife();
+                    this.breeders[j].checkLife();
                 }
 
                 this.totalPop.splice(i,1);
+            }
+            if(this.totalPop[i].job === "none")
+            {
+                workHours += this.totalPop[i].xp;
             }
         }
 
@@ -331,8 +361,8 @@ var PlayerSite = function(mainSite)
         line.a = this.totalPop[dexa];
         line.b = this.totalPop[dexb];
         line.id = this.breeders.length;
-        line.a.idle = false;
-        line.b.idle = false;
+        line.a.job = "breeder";
+        line.b.job = "breeder";
         line.meanHP = Math.min(line.a.hp, line.b.hp);
         //line.special = line.a.special.concat(line.b.special).unique();
 
@@ -403,7 +433,7 @@ var Breeder = function()
 	{
 		var critter = new Critter();
 		critter.age = 0;
-        critter.idle = true;
+        critter.job = "none";
 		critter.xp = Math.max(Math.min(this.a.xp, this.b.xp), 1)*Math.random()*2;
 		critter.hp = this.meanHP + Math.round((Math.random()-0.5)*2); //NEWHP
         critter.gen = Math.max(this.a.gen+1, this.b.gen+1);

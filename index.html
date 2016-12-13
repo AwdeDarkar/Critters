@@ -28,6 +28,7 @@
 
 		<!-- jQuery CDN -->
 		<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 
 		<!-- Game Code -->
 		<script type="text/javascript" src="crittersGame.js"></script>
@@ -60,22 +61,24 @@
 		</script>
 
 		<div id="header">
-			Population: <i id="pop_info">2 (+n/sec)</i><br>
-			Food: <i id="food_info">100 (+n/sec)</i><br>
-			Clay: <i id="clay_info">100 (+n/sec)</i><br>
-			UBT: <i id="ubt_info">100 (+n/sec)</i>
-		</div>
+			<div id="login_info">
 
-		<div id="footer">
-
+			</div>
+			<div id="head_infopane">
+				Population: <i id="pop_info">2 (+n/sec)</i><br>
+				Food: <i id="food_info">100 (+n/sec)</i><br>
+				Clay: <i id="clay_info">100 (+n/sec)</i><br>
+				UBT: <i id="ubt_info">100 (+n/sec)</i><br>
+				Work Hours: <i id="wrk_info">100 (+n/sec)</i>
+			</div>
 		</div>
 
 		<div id="panel" class="noselect">
 			<ul class="tabs">
 				<li class="tablinks active" id='tl_breed'><a href="javascript:void(0)" onclick="openTab(event, 'tab_breeding', 'tl_breed')">Breed</a></li>
-				<li class="tablinks" id='tl_gather'><a href="javascript:void(0)" onclick="openTab(event, 'tab_resources', 'tl_gather')">Gather</a></li>
-				<li class="tablinks" id='tl_explore'><a href="javascript:void(0)" onclick="openTab(event, 'tab_site', 'tl_explore')">Explore</a></li>
+				<li class="tablinks" id='tl_gather'><a href="javascript:void(0)" onclick="openTab(event, 'tab_resources', 'tl_gather')">Build</a></li>
 				<li class="tablinks" id='tl_train'><a href="javascript:void(0)" onclick="openTab(event, 'tab_barracks', 'tl_train')">Train</a></li>
+				<li class="tablinks" id='tl_explore'><a href="javascript:void(0)" onclick="openTab(event, 'tab_site', 'tl_explore')">Explore</a></li>
 				<li class="tablinks" id='tl_trade'><a href="javascript:void(0)" onclick="openTab(event, 'tab_trade', 'tl_trade')">Trade</a></li>
 			</ul>
 		</div>
@@ -83,35 +86,26 @@
 		<div id="main">
 
 			<div id="tab_resources" display="none" class="tabcontent">
-				<p>Resources</p>
+				<div id="d_farm" class="buildpane">
+					<div id="info_farm" class="buildinfo">
+						<p>X Needed for better farm</p>
+					</div>
+					<div class="buildbtns">
+						<button class="popbtn" id="btn_upgradeFarm" disabled="true" onclick="upFarm();">Construct New Farm</button>
+					</div>
+				</div>
+				<div id="d_mine" class="buildpane">
+					<div id="info_mine" class="buildinfo">
+						<p>Y Needed for better farm</p>
+					</div>
+					<div class="buildbtns">
+						<button class="popbtn" id="btn_upgradeMine" disabled="true" onclick="upMine();">Construct New Mine</button>
+					</div>
+				</div>
 			</div>
 
 			<div id="tab_trade" display="none" class="tabcontent">
 
-				<div class="ctr_pane" id="r_avail">
-					<div id="trade_center">
-						<br><h3> Propose a Trade<h3>
-						<form>
-								I will give: <input type="number" name="resources_given" > Resources<br>
-								In exchange for: <input type="number" name="resources_received"> Resources<br><br>
-								<input id="button1" type="submit">
-						</form>
-					</div>
-				</div>
-
-				<div class="ctr_pane" id="t_avail">
-					<h2>Current Troops</h2>
-					<p>Offensive: <label id="o_troops">0</label></p>
-					<p>Defensive: <label id="d_troops">0</label></p>
-					<div id="trade_center">
-						<br><h3> Propose a Trade<h3>
-						<form>
-								I will give: <input type="number" name="troops_given" > Troops<br>
-								In exchange for: <input type="number" name="troops_received"> Troops<br><br>
-								<input id="button1" type="submit">
-						</form>
-					</div>
-				</div>
 			</div>
 
 			<div id="tab_site" display="none" class="tabcontent">
@@ -119,7 +113,39 @@
 			</div>
 
 			<div id="tab_barracks" display="none" class="tabcontent">
-				<p>Barracks</p>
+				<div id="d_armlist">
+					<div class="armies">
+						<p>Line 1</p>
+						<ul>
+							<li>Trait 1</li>
+							<li>Trait 2</li>
+						</ul>
+					</div>
+				</div>
+				<div id="d_warriors">
+					<table id="warriors">
+						<tr>
+							<td>hp</td>
+							<td>age</td>
+							<td>sp</td>
+						</tr>
+					</table>
+				</div>
+				<div id="d_armygen">
+					<button class="warbtn" id="btn_createArmy" disabled="true" onclick="newArmy();">Create Army</button>
+					<div id="d_armyctrl">
+						<p>Flag:</p>
+						<form id="armyflags">
+							<input type="radio" name="flag" value="defend"> Defend<br>
+							<input type="radio" name="flag" value="attack"> Attack<br>
+						</form>
+						<p>Location:</p>
+						<form id="armyflags">
+							<input type="radio" name="loc" value="home"> Home<br>
+							<input type="radio" name="loc" value="site"> Site<br>
+						</form>
+					</div>
+				</div>
 			</div>
 
 			<div id="tab_breeding" display="block" class="tabcontent">
@@ -160,9 +186,6 @@
 		</div>
 	</body>
 	<script>
-	var ps = init();
-	draw(ps);
-	setInterval(draw, 5000);
-	setInterval(update, 1000);
+		handleLogin();
 	</script>
 </html>

@@ -49,7 +49,7 @@
         flush();
     }
 
-    function grab($id)
+    function grab($id,$rate)
     {
         boolean $updated = false;
         //get updatetime from database
@@ -64,6 +64,39 @@
 
     function update()
     {
+        $sql = "SELECT ubt, ubtRt, ubiMax FROM Sites where siteID=1";
+        $data = mysqli_query($conn, $sql);
 
+        $ubt = 0;
+        $ubtRt = 0;
+        $ubtMax = 0;
+
+        if(mysqli_num_rows($data) > 0)
+	    {
+    		while($row = mysqli_fetch_assoc($data))
+            {
+                $ubt = $row['ubt'];
+                $ubtRt = $row['ubtRt'];
+                $ubtMax = $row['ubtMax'];
+            }
+        }
+    }
+
+    if($_SERVER["REQUEST_METHOD"] == "GET")
+    {
+        switch($_GET['type'])
+        {
+            case "genplayer":
+            {
+                $sql = "INSERT INTO `povrandb`.`Players` (`playerID`, `email`, `password`, `name`, `siteID`, `siteOffenseArmy`, `siteDefenseArmy`, `siteAttackList`, `siteDefendList`, `siteDrawRate`, `homeDefense`) VALUES (NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);"
+                echo mysqli_insert_id ($conn);
+                break;
+            }
+            case "update":
+            {
+                echo grab($_GET['id']);
+                break;
+            }
+        }
     }
 ?>
