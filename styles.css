@@ -79,7 +79,9 @@ h1 h2 h3
 
 #header
 {
-	text-align: center;
+	margin-left: 10%;
+    margin-right: 10%;
+    height: 10%;
 }
 
 #footer
@@ -125,7 +127,12 @@ h1 h2 h3
 
 #main
 {
+    margin-top: 500px;
+}
 
+#panel
+{
+    margin-top: 11%;
 }
 
 .tabcontent
@@ -134,10 +141,11 @@ h1 h2 h3
     margin-left: 120px;
     margin-right: 10%;
     width: 80%;
-    top: 0px;
-    height: 80%;
+    height: 70%;
     border: 1px solid #ccc;
     background-color: #FEFEFA;
+    top: 0px;
+    margin-top: 10%;
 }
 
 #d_poplist
@@ -145,12 +153,11 @@ h1 h2 h3
     border: 2px solid black;
     overflow-y: scroll;
     width: 75%;
-    height: 435px;
+    height: 70%;
 }
 
 #d_poplist table,tr,tr
 {
-    border: 1px solid black;
     width: 60%;
 }
 
@@ -176,22 +183,7 @@ h1 h2 h3
 
 .poplist_dex
 {
-    display: none;
-}
 
-.poplist_dex label:before
-{
-    border-radius: 8px;
-}
-
-.poplist_dex:checked
-{
-    content: "\2713";
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
-    font-size: 15px;
-    color: #f3f3f3;
-    text-align: center;
-    line-height: 15px;
 }
 
 #poplist
@@ -217,10 +209,16 @@ h1 h2 h3
     width: 120px;
 }
 
+.breedline:hover
+{
+    background-color: #ccc;
+}
+
 #d_linegen
 {
-    margin-left: 85%;
-    margin-top: -52%;
+    position: relative;
+    margin-left: 75%;
+    top: -65%;
 }
 
 button

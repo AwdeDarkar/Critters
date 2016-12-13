@@ -60,7 +60,10 @@
 		</script>
 
 		<div id="header">
-
+			Population: <i id="pop_info">2 (+n/sec)</i><br>
+			Food: <i id="food_info">100 (+n/sec)</i><br>
+			Clay: <i id="clay_info">100 (+n/sec)</i><br>
+			UBT: <i id="ubt_info">100 (+n/sec)</i>
 		</div>
 
 		<div id="footer">
@@ -123,9 +126,9 @@
 					</table>
 				</div>
 				<div id="d_linegen">
-					<button class="popbtn" id="btn_createLine" disabled="true">Create Line</button>
+					<button class="popbtn" id="btn_createLine" disabled="true" onclick="newLine();">Create Line</button>
 					<button class="popbtn" id="btn_sendBarracks" disabled="true">Send to Barracks</button>
-					<button class="popbtn" id="btn_sendFarms" disabled="true">Send to Farms</button>
+					<button class="popbtn" id="btn_sendFarms" disabled="true" onclick="toFarms();">Send to Farms</button>
 					<button class="popbtn" id="btn_sendMines" disabled="true">Send to Mines</button>
 					<button class="popbtn" id="btn_sendSite" disabled="true">Send to Site</button>
 				</div>
@@ -136,5 +139,7 @@
 	<script>
 	var ps = init();
 	draw(ps);
+	setInterval(draw, 5000);
+	setInterval(update, 1000);
 	</script>
 </html>
