@@ -52,17 +52,11 @@
 				for (i = 0; i < tablinks.length; i++)
 				{
 					tablinks[i].className = tablinks[i].className.replace(" active", "");
+					// Show the current tab, and add an "active" class to the link that opened the tab
+					document.getElementById(tab).style.display = "block";
+					document.getElementById(tl).className += " active";
 				}
-
-				// Show the current tab, and add an "active" class to the link that opened the tab
-				document.getElementById(tab).style.display = "block";
-				document.getElementById(tl).className += " active";
-
 			}
-
-			var ps = init();
-			draw(ps);
-
 		</script>
 
 		<div id="header">
@@ -128,8 +122,19 @@
 						</tr>
 					</table>
 				</div>
+				<div id="d_linegen">
+					<button class="popbtn" id="btn_createLine" disabled="true">Create Line</button>
+					<button class="popbtn" id="btn_sendBarracks" disabled="true">Send to Barracks</button>
+					<button class="popbtn" id="btn_sendFarms" disabled="true">Send to Farms</button>
+					<button class="popbtn" id="btn_sendMines" disabled="true">Send to Mines</button>
+					<button class="popbtn" id="btn_sendSite" disabled="true">Send to Site</button>
+				</div>
 			</div>
 
 		</div>
 	</body>
+	<script>
+	var ps = init();
+	draw(ps);
+	</script>
 </html>

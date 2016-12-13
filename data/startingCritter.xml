@@ -2,6 +2,7 @@
     <age>0</age>
     <hp>10</hp>
     <xp>0</xp>
+    <gen>0</gen>
     <special>
         <sp>progen</sp>
     </special>

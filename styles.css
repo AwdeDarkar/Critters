@@ -148,9 +148,55 @@ h1 h2 h3
     height: 435px;
 }
 
+#d_poplist table,tr,tr
+{
+    border: 1px solid black;
+    width: 60%;
+}
+
+#d_poplist tr:nth-child(even)
+{
+    color: #617E95;
+}
+
+#d_poplist tr:nth-child(odd)
+{
+    color: #7F689D;
+}
+
+#d_poplist tr:nth-child(even):hover
+{
+    color: #A2B2BE;
+}
+
+#d_poplist tr:nth-child(odd):hover
+{
+    color: #B4A8C4;
+}
+
+.poplist_dex
+{
+    display: none;
+}
+
+.poplist_dex label:before
+{
+    border-radius: 8px;
+}
+
+.poplist_dex:checked
+{
+    content: "\2713";
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
+    font-size: 15px;
+    color: #f3f3f3;
+    text-align: center;
+    line-height: 15px;
+}
+
 #poplist
 {
-    
+
 }
 
 #d_breedlist
@@ -169,4 +215,34 @@ h1 h2 h3
     border-right: 3px solid black;
     margin: 6px;
     width: 120px;
+}
+
+#d_linegen
+{
+    margin-left: 85%;
+    margin-top: -52%;
+}
+
+button
+{
+  font-family: 'Trocchi', serif;
+  font-size: 16px;
+  border-radius: 8px;
+  background-color: #e7e7e7; color: black;
+  padding: 6px;
+  margin: 6px;
+}
+
+button:disabled
+{
+  font-family: 'Trocchi', serif;
+  font-size: 16px;
+  border-radius: 8px;
+  background-color: #e0e0e0; color: gray;
+  padding: 6px;
+}
+
+button:active
+{
+
 }

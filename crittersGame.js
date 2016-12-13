@@ -3,16 +3,43 @@ function draw(ps)
     //DRAW POPULATION
     var poplist = document.getElementById("poplist");
     clearnode(poplist);
-    for(var i = 0; i < ps.length; i++)
+    for(var i = 0; i < ps.totalPop.length; i++)
     {
-        var row = poplist.insertRow(0);
-        var hpcell = row.insertCell(0);
-        var agecell = row.insertCell(1);
-        var xpcell = row.inserCell(2);
+        var row = poplist.insertRow(i);
+        var gencell = row.insertCell(0);
+        var hpcell = row.insertCell(1);
+        var agecell = row.insertCell(2);
+        var xpcell = row.insertCell(3);
+        var selcell = row.insertCell(4);
 
-        hpcell.innerHTML = ps[i].hp;
-        agepcell.innerHTML = ps[i].age;
-        xpcell.innerHTML = ps[i].xp;
+        gencell.innerHTML = i + ")";
+        hpcell.innerHTML = ps.totalPop[i].hp;
+        agecell.innerHTML = ps.totalPop[i].age;
+        xpcell.innerHTML = ps.totalPop[i].xp;
+        var box = document.createElement("input");
+        box.type = "checkbox";
+        box.id = "poplist_dex_" + i;
+        box.class = "poplist_dex";
+        box.onclick = drawButtons;
+        selcell.appendChild(box);
+    }
+}
+
+function drawButtons()
+{
+    var numbtns = 0;
+    var btnlist = document.getElementsByClassName("popbtn");
+    for(var i = 0; i < btnlist.length; i++)
+    {
+        if(btnlist[i].checked)
+            numbtns++;
+    }
+    if(numbtns == 2)
+    {
+        document.getElementById("btn_createLine").disabled = false;
+    }else
+    {
+        document.getElementById("btn_createLine").disabled = true;
     }
 }
 
@@ -29,7 +56,7 @@ function update()
 function init()
 {
     var ps = new PlayerSite();
-    var critter = loadCritter(HARD_DEF_CRITTER);
+    var critter = loadCritter($($.parseXML(HARD_DEF_CRITTER)));
     ps.totalPop.push(critter);
     ps.totalPop.push(critter);
 
@@ -41,6 +68,7 @@ var Critter = function()
 	this.hp = 0;
 	this.age = 0;
 	this.xp = 0;
+    this.gen = 0;
 	this.special = [];
 }
 
@@ -93,23 +121,50 @@ var PlayerSite = function(mainSite)
 
 	this.checkHours = function()
 	{
-
+        if(this.workHours >= 0)
+            return true;
+        while(this.workHours < 0)
+        {
+            salvageTheUnfinished(this.projects);
+            this.workHours++;
+        }
 	}
 
 	this.checkFood = function()
 	{
-
+        if(this.food >= 0)
+            return true;
+        while(this.food < 0)
+        {
+            killTheWeak(this.totalPop);
+            this.food++;
+        }
 	}
 
 	this.checkClay = function()
 	{
-
+        if(this.clay >= 0)
+            return true;
+        while(this.clay < 0)
+        {
+            pillageTheOld(this.buildings);
+            this.clay++;
+        }
 	}
 
 	this.checkUBT = function()
 	{
 
 	}
+
+    this.newBreeder = function(dexa, dexb)
+    {
+        line = new Breeder();
+        line.a = this.totalPop[dexa];
+        line.b = this.totalPop[dexb];
+
+        this.breeders.push(line);
+    }
 }
 
 var Building = function()
@@ -146,7 +201,12 @@ var Building = function()
 
 var Army = function()
 {
+    this.members = [];
+    this.strength = [];
+    this.calcStrength = function()
+    {
 
+    }
 }
 
 var Breeder = function()
@@ -161,6 +221,7 @@ var Breeder = function()
 		critter.age = 0;
 		critter.xp = 0;
 		critter.hp = 10; //NEWHP
+        critter.gen = max(a.gen+1, b.gen+1);
 		critter.special = this.genSpecial();
 		site.totalPop.push(critter);
 	}
@@ -177,13 +238,14 @@ function loadCritter(doc)
     r.age = getTag(doc, "age");
     r.hp = getTag(doc, "hp");
     r.xp = getTag(doc, "xp");
-    special = doc.getElementByTagName("special");
-    for(var i = 0; i < special.childNodes.length; i++) { r.special.push(special.childNodes[i].nodeValue); }
+    r.gen = getTag(doc, "gen");
+    //special = doc.find("special");
+    //for(var i = 0; i < special.childNodes.length; i++) { r.special.push(special.childNodes[i].nodeValue); }
     return r;
 }
 
 
 
-function getTag(doc, tag) { return doc.getElementsByTagName(tag)[0].childNodes[0].nodeValue; }
+function getTag(doc, tag) { return doc.find(tag).text(); }
 
 var HARD_DEF_CRITTER = "<critter>\n\t<age>0</age>\n\t<hp>10</hp>\n\t<xp>0</xp>\n\t<special>\n\t\t<sp>progen</sp>\n\t</special>\n</critter>";
