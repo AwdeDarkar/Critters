@@ -20,7 +20,7 @@ function draw()
     //UPDATE RESOURCE LIST
     document.getElementById("pop_info").innerHTML = ps.totalPop.length + " (+ " + Math.round((ps.breeders.length/BREED_UPDATE)*100)/100 + "/sec)";
     document.getElementById("food_info").innerHTML = Math.round(ps.food) + " (+ " + Math.round((ps.hoursHarvest - (ps.totalPop.length + (ps.breeders.length/BREED_UPDATE)))*100)/100 + "/sec)";
-    document.getElementById("clay_info").innerHTML = ps.clay;
+    document.getElementById("clay_info").innerHTML = Math.round(ps.clay) + " (+ " + Math.round((ps.hoursMine*100))/100 + "/sec)";
     document.getElementById("ubt_info").innerHTML = ps.ubt;
 
     //DRAW POPULATION
@@ -163,6 +163,37 @@ function toFarms()
         if(box != null && box.checked)
         {
             ps.hoursHarvest += ps.totalPop[i].xp * 1.2;
+            ps.totalPop[i].idle = false;
+        }
+    }
+    draw();
+    drawButtons();
+}
+
+function toBarracks()
+{
+    var bxlst = document.getElementsByClassName("poplistrw");
+    for(var i = 0; i < bxlst.length; i++)
+    {
+        var box = document.getElementById("poplist_dex_" + i);
+        if(box != null && box.checked)
+        {
+            //SEND THIS TO BARRACKS
+        }
+    }
+    draw();
+    drawButtons();
+}
+
+function toMines()
+{
+    var bxlst = document.getElementsByClassName("poplistrw");
+    for(var i = 0; i < bxlst.length; i++)
+    {
+        var box = document.getElementById("poplist_dex_" + i);
+        if(box != null && box.checked)
+        {
+            ps.hoursMine += ps.totalPop[i].xp;
             ps.totalPop[i].idle = false;
         }
     }
